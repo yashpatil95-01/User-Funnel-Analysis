@@ -76,7 +76,8 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints/
-# Ignore Jupyter notebook checkpoints (autosave files)
+outputs/**/.ipynb_checkpoints/
+# Ignore Jupyter notebook checkpoints (autosave files) in all folders, including outputs/
 
 # IPython
 profile_default/
