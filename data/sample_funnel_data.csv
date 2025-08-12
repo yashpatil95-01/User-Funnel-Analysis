@@ -1,0 +1,12 @@
+user_id,event,timestamp,source,device
+1,page_view,2024-01-01 10:00:00,organic,desktop
+1,signup,2024-01-01 10:15:00,organic,desktop
+1,first_purchase,2024-01-01 12:30:00,organic,desktop
+2,page_view,2024-01-01 11:00:00,paid,mobile
+2,signup,2024-01-01 11:20:00,paid,mobile
+3,page_view,2024-01-01 12:00:00,social,desktop
+4,page_view,2024-01-01 13:00:00,organic,tablet
+4,signup,2024-01-01 13:45:00,organic,tablet
+4,first_purchase,2024-01-02 09:00:00,organic,tablet
+4,repeat_purchase,2024-01-05 14:30:00,organic,tablet
+5,page_view,2024-01-01 14:00:00,email,mobile

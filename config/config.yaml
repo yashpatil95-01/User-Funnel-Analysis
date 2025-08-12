@@ -1,0 +1,36 @@
+# Funnel Analysis Configuration
+
+# Data settings
+data:
+  input_path: "../data/funnel_data.csv"
+  output_path: "../outputs/"
+  
+# Column mappings
+columns:
+  user_id: "user_id"
+  event: "event"
+  timestamp: "timestamp"
+
+# Default funnel steps (customize based on your business)
+funnel_steps:
+  - "page_view"
+  - "signup"
+  - "first_purchase"
+  - "repeat_purchase"
+
+# Visualization settings
+visualization:
+  theme: "plotly_white"
+  color_palette: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd"]
+  
+# Dashboard settings
+dashboard:
+  host: "127.0.0.1"
+  port: 8050
+  debug: true
+
+# Analysis parameters
+analysis:
+  min_users_per_step: 10
+  confidence_level: 0.95
+  time_window_days: 30
