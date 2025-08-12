@@ -4,7 +4,10 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from funnel_analyzer import FunnelAnalyzer
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from analysis.funnel_analyzer import FunnelAnalyzer
 
 # Initialize the Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -198,10 +201,10 @@ def update_insights(figure):
     biggest_drop = max(step_drops, key=lambda x: x[1])
     
     insights.extend([
-        html.P(f"📉 Biggest drop-off: {biggest_drop[0]} ({biggest_drop[1]:.1f}% loss)", className="mb-2"),
-        html.P(f"🎯 Overall conversion rate: {analyzer.funnel_data.iloc[-1]['conversion_rate']:.1f}%", className="mb-2"),
-        html.P(f"👥 Total users in funnel: {analyzer.funnel_data.iloc[0]['count']:,}", className="mb-2"),
-        html.P(f"✅ Final conversions: {analyzer.funnel_data.iloc[-1]['count']:,}", className="mb-2")
+        html.P(f"Biggest drop-off: {biggest_drop[0]} ({biggest_drop[1]:.1f}% loss)", className="mb-2"),
+        html.P(f"Overall conversion rate: {analyzer.funnel_data.iloc[-1]['conversion_rate']:.1f}%", className="mb-2"),
+        html.P(f"Total users in funnel: {analyzer.funnel_data.iloc[0]['count']:,}", className="mb-2"),
+        html.P(f"Final conversions: {analyzer.funnel_data.iloc[-1]['count']:,}", className="mb-2")
     ])
     
     return insights

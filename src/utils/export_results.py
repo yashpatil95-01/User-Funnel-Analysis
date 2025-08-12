@@ -5,15 +5,15 @@ Run this script to generate and save all analysis results to the outputs folder
 
 import sys
 import os
-sys.path.append('.')
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from funnel_analyzer import FunnelAnalyzer
-from cohort_analysis import CohortAnalyzer
+from analysis.funnel_analyzer import FunnelAnalyzer
+from analysis.cohort_analysis import CohortAnalyzer
 import pandas as pd
 import numpy as np
 
 def main():
-    print("🚀 Starting Funnel Analysis Export...")
+    print("Starting Funnel Analysis Export...")
     
     # Initialize analyzer
     analyzer = FunnelAnalyzer()
@@ -21,10 +21,10 @@ def main():
     # Load the large sample data
     try:
         analyzer.load_data('data/large_sample_funnel_data.csv')
-        print("✅ Data loaded successfully")
+        print("Data loaded successfully")
     except Exception as e:
-        print(f"❌ Error loading data: {e}")
-        print("💡 Run 'python src/generate_sample_data.py' first to create sample data")
+        print(f"Error loading data: {e}")
+        print("Run 'python src/generate_sample_data.py' first to create sample data")
         return
     
     # Preprocess data
@@ -34,16 +34,16 @@ def main():
     funnel_steps = ['page_view', 'signup', 'first_purchase', 'repeat_purchase']
     
     # Create funnel analysis
-    print("📊 Creating funnel analysis...")
+    print("Creating funnel analysis...")
     funnel_data = analyzer.create_funnel_analysis(funnel_steps)
     print(funnel_data)
     
     # Save all visualizations
-    print("💾 Saving visualizations...")
+    print("Saving visualizations...")
     analyzer.save_visualizations('outputs')
     
     # Create additional analysis
-    print("📈 Creating additional analysis...")
+    print("Creating additional analysis...")
     
     # Source performance analysis
     source_analysis = analyzer.data.groupby(['source', 'event']).size().unstack(fill_value=0)
@@ -71,8 +71,8 @@ def main():
     # Create summary report
     create_summary_report(analyzer, funnel_data, source_analysis, device_analysis)
     
-    print("\n🎉 Analysis complete! Results saved to outputs/ folder:")
-    print("📁 Check the outputs/ directory for:")
+    print("\nAnalysis complete! Results saved to outputs/ folder:")
+    print("Check the outputs/ directory for:")
     print("   - Interactive HTML charts")
     print("   - CSV data exports")
     print("   - Summary report")
@@ -121,16 +121,16 @@ def create_summary_report(analyzer, funnel_data, source_analysis, device_analysi
     
     if step_drops:
         biggest_drop = max(step_drops, key=lambda x: x[1])
-        report.append(f"• Biggest drop-off at: {biggest_drop[0]} ({biggest_drop[1]:.1f}% loss)")
+        report.append(f"- Biggest drop-off at: {biggest_drop[0]} ({biggest_drop[1]:.1f}% loss)")
     
-    report.append(f"• Overall conversion rate: {funnel_data.iloc[-1]['conversion_rate']:.1f}%")
-    report.append(f"• {funnel_data.iloc[-1]['count']:,} users completed the full funnel")
+    report.append(f"- Overall conversion rate: {funnel_data.iloc[-1]['conversion_rate']:.1f}%")
+    report.append(f"- {funnel_data.iloc[-1]['count']:,} users completed the full funnel")
     
     # Save report
     with open('outputs/analysis_summary.txt', 'w') as f:
         f.write('\n'.join(report))
     
-    print("📄 Summary report saved to outputs/analysis_summary.txt")
+    print("Summary report saved to outputs/analysis_summary.txt")
 
 if __name__ == "__main__":
     main()

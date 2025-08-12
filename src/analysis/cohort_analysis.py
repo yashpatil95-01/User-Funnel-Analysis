@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import seaborn as sns
 import matplotlib.pyplot as plt
+from operator import attrgetter
 
 class CohortAnalyzer:
     def __init__(self, data):
@@ -102,5 +103,3 @@ class CohortAnalyzer:
         )
         
         return fig
-
-from operator import attrgetter
